@@ -2,7 +2,7 @@ function main() {
     const canvas = document.getElementById("glcanvas");
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    
+
     const gl = canvas.getContext("webgl");
 
     if (!gl) {
@@ -53,15 +53,31 @@ function main() {
     gl.enableVertexAttribArray(vertexColorAttribute);
 
     const vertices = new Float32Array([
-         0.0,  1.0,  0.0,  // Atas Tengah
-        -1.0, -1.0,  0.0,  // Kiri Bawah
-         1.0, -1.0,  0.0,  // Kanan Bawah
+         0.0,  1.0,  0.0,  // Ujung atas segitiga berwarna (luar)
+        -1.0, -1.0,  0.0,  // Ujung kiri bawah segitiga berwarna (luar)
+         1.0, -1.0,  0.0,  // Ujung kanan bawah segitiga berwarna (luar)
+         
+         0.0, -1.0,  0.0,  // Ujung bawah segitiga hitam
+         0.5,  0.0,  0.0,  // Ujung kanan atas segitiga hitam
+        -0.5,  0.0,  0.0,  // Ujung kiri atas segitiga hitam
+
+         0.0,  0.0,  0.0,  // Ujung atas segitiga berwarna (dalam)
+        -0.25, -0.5,  0.0,  // Ujung kiri bawah segitiga berwarna (dalam)
+         0.25, -0.5,  0.0,  // Ujung kanan bawah segitiga berwarna (dalam)
     ]);
 
     const colors = new Float32Array([
-        1.0,  0.0,  0.0,  1.0,  // Merah
-        0.0,  1.0,  0.0,  1.0,  // Hijau
-        0.0,  0.0,  1.0,  1.0,  // Biru
+        1.0,  0.0,  0.0,  1.0,  // Merah (segitiga luar)
+        0.0,  1.0,  0.0,  1.0,  // Hijau (segitiga luar)
+        0.0,  0.0,  1.0,  1.0,  // Biru (segitiga luar)
+        
+        0.0,  0.0,  0.0,  1.0,  // Hitam (segitiga tengah)
+        0.0,  0.0,  0.0,  1.0,  // Hitam (segitiga tengah)
+        0.0,  0.0,  0.0,  1.0,  // Hitam (segitiga tengah)
+
+        1.0,  1.0,  0.0,  1.0,  // Kuning (segitiga dalam)
+        0.0,  1.0,  1.0,  1.0,  // Cyan (segitiga dalam)
+        1.0,  0.0,  1.0,  1.0,  // Magenta (segitiga dalam)
     ]);
 
     const vertexBuffer = gl.createBuffer();
@@ -78,7 +94,9 @@ function main() {
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT);
 
-    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);  // Gambar segitiga berwarna luar
+    gl.drawArrays(gl.TRIANGLES, 3, 3);  // Gambar segitiga hitam tengah
+    gl.drawArrays(gl.TRIANGLES, 6, 3);  // Gambar segitiga berwarna dalam
 }
 
 function loadShader(gl, type, source) {
