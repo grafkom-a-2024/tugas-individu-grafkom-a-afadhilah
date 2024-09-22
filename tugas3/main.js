@@ -36,6 +36,11 @@ function init() {
 function createObjects() {
     const sphereGeometry = new THREE.SphereGeometry(0.5, 32, 32);
 
+    // Buat texture loader
+    const textureLoader = new THREE.TextureLoader();
+
+    // Load textures
+    const texture1 = textureLoader.load('10700677_43402.jpg');
     // Sphere 1
     const material1 = new THREE.MeshPhongMaterial({color: 0xff0000});
     sphere1 = new THREE.Mesh(sphereGeometry, material1);
@@ -72,13 +77,20 @@ function createObjects() {
 
 function createColoredWalls() {
     const wallGeometry = new THREE.PlaneGeometry(boxSize, boxSize);
+
+    // Buat texture loader
+    const textureLoader = new THREE.TextureLoader();
+
+    // Load textures
+    const texture1 = textureLoader.load('10700677_43402.jpg');
+
     const wallMaterials = [
         new THREE.MeshPhongMaterial({color: 0xff0000, transparent: true, opacity: 0.2, side: THREE.DoubleSide}),
         new THREE.MeshPhongMaterial({color: 0x00ff00, transparent: true, opacity: 0.2, side: THREE.DoubleSide}),
         new THREE.MeshPhongMaterial({color: 0x0000ff, transparent: true, opacity: 0.2, side: THREE.DoubleSide}),
         new THREE.MeshPhongMaterial({color: 0xffff00, transparent: true, opacity: 0.2, side: THREE.DoubleSide}),
         new THREE.MeshPhongMaterial({color: 0xff00ff, transparent: true, opacity: 0.2, side: THREE.DoubleSide}),
-        new THREE.MeshPhongMaterial({color: 0x00ffff, transparent: true, opacity: 0.2, side: THREE.DoubleSide})
+        new THREE.MeshPhongMaterial({map: texture1, transparent: true, opacity: 1, side: THREE.DoubleSide})
     ];
 
     const wallPositions = [
