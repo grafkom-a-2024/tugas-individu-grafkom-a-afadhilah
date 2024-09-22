@@ -90,7 +90,7 @@ function createColoredWalls() {
         new THREE.MeshPhongMaterial({color: 0x0000ff, transparent: true, opacity: 0.2, side: THREE.DoubleSide}),
         new THREE.MeshPhongMaterial({color: 0xffff00, transparent: true, opacity: 0.2, side: THREE.DoubleSide}),
         new THREE.MeshPhongMaterial({color: 0xff00ff, transparent: true, opacity: 0.2, side: THREE.DoubleSide}),
-        new THREE.MeshPhongMaterial({map: texture1, transparent: true, opacity: 1, side: THREE.DoubleSide})
+        new THREE.MeshPhongMaterial({map: texture1, side: THREE.DoubleSide})
     ];
 
     const wallPositions = [
